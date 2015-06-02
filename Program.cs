@@ -15,6 +15,7 @@ namespace Dijkstra
             startnode = Console.ReadLine();
             Console.WriteLine("Geben Sie den Endpunkt ein");
             endnode = Console.ReadLine();
+            Library.previousValue = 0;
 
             func.FindWay(startnode, endnode);
 
