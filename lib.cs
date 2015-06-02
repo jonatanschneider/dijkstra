@@ -8,40 +8,42 @@ namespace Dijkstra
 {
     class Library
     {
-
-        public static int previousValue { get; set; }
-
         public static Dictionary<string, int> discoveredWays = new Dictionary<string, int>
         {
         };
 
-        public static Dictionary<string, int> unvisitedWays = new Dictionary<string, int>
-        {
-            {"AB", 6}, {"AD", 7}, {"BC", 4},
-            {"BE", 4}, {"CF", 6}, {"CI", 8},
-            {"DG", 5}, {"EJ", 5}, {"FK", 5},
-            {"GH", 5}, {"GI", 7}, {"HL", 5},
-            {"IM", 5}, {"JK", 7}, {"JT", 4},
-            {"KU", 9}, {"LM", 6}, {"MN", 5},
-            {"NO", 7}, {"OQ", 5}, {"PQ", 8},
-            {"PU", 2}, {"QX", 7}, {"RT", 8},
-            {"RY", 10}, {"RZ", 4},{"SW", 2}, 
-            {"SX", 4}, {"TV", 7}, {"WY", 9},
-            {"XY", 11}
-        };
-
         public static Dictionary<string, int> waysAndValues = new Dictionary<string, int>
         {
-            {"AB", 6}, {"AD", 7}, {"BC", 4},
-            {"BE", 4}, {"CF", 6}, {"CI", 8},
-            {"DG", 5}, {"EJ", 5}, {"FK", 5},
-            {"GH", 5}, {"GI", 7}, {"HL", 5},
-            {"IM", 5}, {"JK", 7}, {"JT", 4},
-            {"KU", 9}, {"LM", 6}, {"MN", 5},
-            {"NO", 7}, {"OQ", 5}, {"PQ", 8},
-            {"PU", 2}, {"QX", 7}, {"RT", 8},
-            {"RY", 10}, {"RZ", 4},{"SW", 2}, 
-            {"SX", 4}, {"TV", 7}, {"WY", 9},
+            {"AB", 6},
+            {"AD", 7},
+            {"BC", 4},
+            {"BE", 4},
+            {"CF", 6},
+            {"CI", 8},
+            {"DG", 5},
+            {"EJ", 5},
+            {"FK", 5},
+            {"GH", 5},
+            {"GI", 7},
+            {"HL", 5},
+            {"IM", 5},
+            {"JK", 7},
+            {"JT", 4},
+            {"KU", 9},
+            {"LM", 6},
+            {"MN", 5},
+            {"NO", 7},
+            {"OQ", 5},
+            {"PQ", 8},
+            {"PU", 2},
+            {"QX", 7},
+            {"RT", 8},
+            {"RY", 10},
+            {"RZ", 4},
+            {"SW", 2},
+            {"SX", 4},
+            {"TV", 7},
+            {"WY", 9},
             {"XY", 11}
         };
     }

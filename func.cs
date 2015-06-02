@@ -16,7 +16,6 @@ namespace Dijkstra
 
             if (destinationReached)
             {
-                Console.WriteLine("Fertig");
                 return true;
             }
 
@@ -24,7 +23,7 @@ namespace Dijkstra
             {
                 //Rekursion
                 destinationReached = FindWay(neighbours[i], endnode);
-                //FindWay(neighbours[i], endnode);
+
                 if (destinationReached)
                 {
                     return destinationReached;
@@ -47,22 +46,19 @@ namespace Dijkstra
             {
                 if (i.Key.StartsWith(node))
                 {
-                    int currentValue = Library.previousValue + i.Value;
+                    Library.discoveredWays.Add(i.Key, i.Value);
                     neighbours[neighbourCount] = i.Key.Substring(1);
-                    Library.unvisitedWays.Remove(i.Key);
                     neighbourCount++;
-
-
-                    if (currentValue < i.Value)
-                    {
-                        //Was ist wenn nicht der direkte Nachbar als nächstes besucht wird?
-                        //Testen ob das Dict wirklich beschrieben wird!
-                        Library.discoveredWays.Add(i.Key.Substring(1), Library.previousValue + i.Value);
-                        Library.previousValue += i.Value;
-                    }
-
                 }
             }
+            /* for (int i = 0; i < Library.NumberOfWays; i++)
+            {
+                if (Library.names[i].StartsWith(node))
+                {
+                    neighbours[neighbourCount] = Library.names[i].Substring(1);
+                    neighbourCount++;
+                }
+            }  */
             string[] result = new string[neighbourCount];
 
             if (neighbourCount > 0)
