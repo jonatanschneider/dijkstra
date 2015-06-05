@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Dijkstra
 {
@@ -17,14 +14,16 @@ namespace Dijkstra
             if (destinationReached)
             {
                 Console.WriteLine("Fertig");
+                Console.WriteLine(Library.shortestPath);
+                Console.ReadLine();
                 return true;
             }
 
             for (int i = 0; i < neighbours.Length; i++)
             {
-                //Rekursion
+                Library.previousValue = Library.discoveredWays[neighbours[i]];
                 destinationReached = FindWay(neighbours[i], endnode);
-                //FindWay(neighbours[i], endnode);
+
                 if (destinationReached)
                 {
                     return destinationReached;
@@ -32,6 +31,8 @@ namespace Dijkstra
             }
             return destinationReached;
         }
+
+
         /// <summary>
         /// Sucht alle Nachbarn eines Knotens und schreibt sie in ein Array
         /// </summary>
@@ -47,20 +48,9 @@ namespace Dijkstra
             {
                 if (i.Key.StartsWith(node))
                 {
-                    int currentValue = Library.previousValue + i.Value;
+                    MarkNodeAsVisited(i);
                     neighbours[neighbourCount] = i.Key.Substring(1);
-                    Library.unvisitedWays.Remove(i.Key);
                     neighbourCount++;
-
-
-                    if (currentValue < i.Value)
-                    {
-                        //Was ist wenn nicht der direkte Nachbar als nächstes besucht wird?
-                        //Testen ob das Dict wirklich beschrieben wird!
-                        Library.discoveredWays.Add(i.Key.Substring(1), Library.previousValue + i.Value);
-                        Library.previousValue += i.Value;
-                    }
-
                 }
             }
             string[] result = new string[neighbourCount];
@@ -77,6 +67,31 @@ namespace Dijkstra
             return result;
         }
 
+        public static void MarkNodeAsVisited(KeyValuePair<string, int> node)
+        {
+            Library.unvisitedWays.Remove(node.Key);
+
+            int currentValue = Library.previousValue + node.Value;
+
+            //kann nicht funktionieren da discoveredWays noch keine Werte hat
+            //und somit die foreach Schleife nichts tut
+            foreach (KeyValuePair<string, int> i in Library.discoveredWays)
+            {
+                if (i.Key.StartsWith(node.Key.Substring(1)))
+                {
+                    if (i.Value < node.Value)
+                    {
+                        Library.discoveredWays[node.Key] = i.Value;
+                    }
+                }
+                else
+                {
+                    Library.discoveredWays.Add(node.Key.Substring(1), currentValue);
+                }
+            }
+
+        }
+
         public static bool IsDestinationReached(string endnode, string[] points)
         {
             if (points.Length == 0)
@@ -87,6 +102,7 @@ namespace Dijkstra
             {
                 if (points[i] == endnode)
                 {
+                    Library.shortestPath = Library.discoveredWays[points[i]];
                     return true;
                 }
             }

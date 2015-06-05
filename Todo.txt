@@ -1,9 +1,6 @@
 ﻿
 TODO
 
-- Überprüfen ob discoveredWays wirklich beschrieben wird
-- Was passiert wenn nicht der direkte Nachbar besucht wird mit der Werteausrechnung des currentValue / previousValue ?
-- Aufräumen!
 - Überprüfen ob alle Punkte besucht wurden
 - Ausrechnen der kürzesten Strecke
 - Ausgabe

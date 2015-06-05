@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Dijkstra
 {
@@ -10,6 +6,8 @@ namespace Dijkstra
     {
 
         public static int previousValue { get; set; }
+
+        public static int shortestPath { get; set; }
 
         public static Dictionary<string, int> discoveredWays = new Dictionary<string, int>
         {
