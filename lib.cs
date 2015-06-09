@@ -21,10 +21,10 @@ namespace Dijkstra
             {"GH", 5}, {"GI", 7}, {"HL", 5},
             {"IM", 5}, {"JK", 7}, {"JT", 4},
             {"KU", 9}, {"LM", 6}, {"MN", 5},
-            {"NO", 7}, {"OQ", 5}, {"PQ", 8},
-            {"PU", 2}, {"QX", 7}, {"RT", 8},
+            {"NO", 7}, {"OQ", 5}, /*{"PQ", 8},*/
+            /*{"PU", 2},*/ {"QX", 7}, /*{"RT", 8},
             {"RY", 10}, {"SW", 2}, {"SX", 4},
-            {"WY", 9}, {"XY", 11}
+            {"WY", 9},*/ {"XY", 11}
         };
 
         public static Dictionary<string, int> waysAndValues = new Dictionary<string, int>

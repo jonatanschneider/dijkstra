@@ -30,6 +30,9 @@ namespace Dijkstra
                 }
                 return destinationReached;
             }
+            int shortestPath = Library.discoveredWays[endnode];
+            Console.WriteLine(shortestPath);
+            Console.ReadLine();
             return false;
         }
 
@@ -87,7 +90,7 @@ namespace Dijkstra
                 {
                     if (i.Key.StartsWith(node.Key.Substring(1)))
                     {
-                        if (i.Value > currentValue)
+                        if (currentValue < i.Value)
                         {
                             if (Library.temporaryDict.ContainsKey(node.Key.Substring(1)))
                             {
@@ -118,7 +121,10 @@ namespace Dijkstra
             {
                 if (Library.discoveredWays.ContainsKey(i.Key))
                 {
-                    Library.discoveredWays[i.Key] = i.Value;
+                    if (Library.discoveredWays[i.Key] > i.Value)
+                    {
+                        Library.discoveredWays[i.Key] = i.Value;
+                    }
                 }
                 else
                 {
