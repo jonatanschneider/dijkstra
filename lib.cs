@@ -9,9 +9,9 @@ namespace Dijkstra
 
         public static int shortestPath { get; set; }
 
-        public static Dictionary<string, int> discoveredWays = new Dictionary<string, int>
-        {
-        };
+        public static Dictionary<string, int> discoveredWays = new Dictionary<string, int> { };
+
+        public static Dictionary<string, int> temporaryDict = new Dictionary<string, int> { };
 
         public static Dictionary<string, int> unvisitedWays = new Dictionary<string, int>
         {
@@ -23,9 +23,8 @@ namespace Dijkstra
             {"KU", 9}, {"LM", 6}, {"MN", 5},
             {"NO", 7}, {"OQ", 5}, {"PQ", 8},
             {"PU", 2}, {"QX", 7}, {"RT", 8},
-            {"RY", 10}, {"RZ", 4},{"SW", 2}, 
-            {"SX", 4}, {"TV", 7}, {"WY", 9},
-            {"XY", 11}
+            {"RY", 10}, {"SW", 2}, {"SX", 4},
+            {"WY", 9}, {"XY", 11}
         };
 
         public static Dictionary<string, int> waysAndValues = new Dictionary<string, int>
@@ -38,9 +37,8 @@ namespace Dijkstra
             {"KU", 9}, {"LM", 6}, {"MN", 5},
             {"NO", 7}, {"OQ", 5}, {"PQ", 8},
             {"PU", 2}, {"QX", 7}, {"RT", 8},
-            {"RY", 10}, {"RZ", 4},{"SW", 2}, 
-            {"SX", 4}, {"TV", 7}, {"WY", 9},
-            {"XY", 11}
+            {"RY", 10},{"SW", 2},  {"SX", 4},
+            {"WY", 9}, {"XY", 11}
         };
     }
         /*public static void Ways()

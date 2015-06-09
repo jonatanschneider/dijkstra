@@ -1,6 +1,5 @@
 ﻿
 TODO
 
-- Überprüfen ob alle Punkte besucht wurden
-- Ausrechnen der kürzesten Strecke
 - Ausgabe
+- Problem mit V,Z,R,S,W -> da unerreichbar nach der Liste auf dem AB!

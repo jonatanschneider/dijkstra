@@ -7,29 +7,30 @@ namespace Dijkstra
     {
         public static bool FindWay(string startnode, string endnode)
         {
-            string[] neighbours = FindNeighbours(startnode);
-
-            bool destinationReached = IsDestinationReached(endnode, neighbours);
-
-            if (destinationReached)
+            while (Library.unvisitedWays.Count != 0)
             {
-                Console.WriteLine("Fertig");
-                Console.WriteLine(Library.shortestPath);
-                Console.ReadLine();
-                return true;
-            }
+                string[] neighbours = FindNeighbours(startnode);
 
-            for (int i = 0; i < neighbours.Length; i++)
-            {
-                Library.previousValue = Library.discoveredWays[neighbours[i]];
-                destinationReached = FindWay(neighbours[i], endnode);
+                bool destinationReached = IsDestinationReached(endnode, neighbours);
 
                 if (destinationReached)
                 {
-                    return destinationReached;
+                    Console.WriteLine("Fertig");
+                    //return true;
                 }
+                for (int i = 0; i < neighbours.Length; i++)
+                {
+                    Library.previousValue = Library.discoveredWays[neighbours[i]];
+                    destinationReached = FindWay(neighbours[i], endnode);
+
+                    if (destinationReached)
+                    {
+                        return destinationReached;
+                    }
+                }
+                return destinationReached;
             }
-            return destinationReached;
+            return false;
         }
 
 
@@ -75,21 +76,56 @@ namespace Dijkstra
 
             //kann nicht funktionieren da discoveredWays noch keine Werte hat
             //und somit die foreach Schleife nichts tut
-            foreach (KeyValuePair<string, int> i in Library.discoveredWays)
+
+            if (Library.discoveredWays.Count == 0)
             {
-                if (i.Key.StartsWith(node.Key.Substring(1)))
+                Library.discoveredWays.Add(node.Key.Substring(1), currentValue);
+            }
+            else
+            {
+                foreach (KeyValuePair<string, int> i in Library.discoveredWays)
                 {
-                    if (i.Value < node.Value)
+                    if (i.Key.StartsWith(node.Key.Substring(1)))
                     {
-                        Library.discoveredWays[node.Key] = i.Value;
+                        if (i.Value > currentValue)
+                        {
+                            if (Library.temporaryDict.ContainsKey(node.Key.Substring(1)))
+                            {
+                                Library.temporaryDict[node.Key.Substring(1)] = currentValue;
+                            }
+                            else
+                            {
+                                Library.temporaryDict.Add(node.Key.Substring(1), currentValue);
+                            }
+                        }
                     }
+                        //Überprüft ob der Knoten schon im temp-Dict ist, schreibt ggf. den kleineren Wert rein
+                    else if (Library.temporaryDict.ContainsKey(node.Key.Substring(1)))
+                    {
+                        if (currentValue < Library.temporaryDict[node.Key.Substring(1)])
+                        {
+                            //Library.discoveredWays.Add(node.Key.Substring(1), currentValue);
+                            Library.temporaryDict[node.Key.Substring(1)] = currentValue;
+                        }
+                    }
+                    else
+                    {
+                        Library.temporaryDict.Add(node.Key.Substring(1), currentValue);
+                    }
+                }
+            }
+            foreach (KeyValuePair<string, int> i in Library.temporaryDict)
+            {
+                if (Library.discoveredWays.ContainsKey(i.Key))
+                {
+                    Library.discoveredWays[i.Key] = i.Value;
                 }
                 else
                 {
-                    Library.discoveredWays.Add(node.Key.Substring(1), currentValue);
+                    Library.discoveredWays.Add(i.Key, i.Value);
                 }
             }
-
+            Library.temporaryDict.Clear();
         }
 
         public static bool IsDestinationReached(string endnode, string[] points)
