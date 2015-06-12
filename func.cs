@@ -36,12 +36,6 @@ namespace Dijkstra
             return false;
         }
 
-
-        /// <summary>
-        /// Sucht alle Nachbarn eines Knotens und schreibt sie in ein Array
-        /// </summary>
-        /// <param name="node">Knoten von dem Nachbarn gesucht werden</param>
-        /// <returns>Array mit den Nachbarn</returns>
         public static string[] FindNeighbours(string node)
         {
             string[] neighbours = new string[65];
@@ -61,8 +55,6 @@ namespace Dijkstra
 
             if (neighbourCount > 0)
             {
-                //Schreibt das Ergebnis in das "result" Array
-                //und verkleinert das Array so auf die minimale Zahl
                 for (int i = 0; i < neighbourCount; i++)
                 {
                     result[i] = neighbours[i];
@@ -77,61 +69,17 @@ namespace Dijkstra
 
             int currentValue = Library.previousValue + node.Value;
 
-            //kann nicht funktionieren da discoveredWays noch keine Werte hat
-            //und somit die foreach Schleife nichts tut
-
             if (Library.discoveredWays.Count == 0)
             {
                 Library.discoveredWays.Add(node.Key.Substring(1), currentValue);
             }
-            else
+
+            foreach (KeyValuePair<string, int> i in Library.discoveredWays)
             {
-                foreach (KeyValuePair<string, int> i in Library.discoveredWays)
-                {
-                    if (i.Key.StartsWith(node.Key.Substring(1)))
-                    {
-                        if (currentValue < i.Value)
-                        {
-                            if (Library.temporaryDict.ContainsKey(node.Key.Substring(1)))
-                            {
-                                Library.temporaryDict[node.Key.Substring(1)] = currentValue;
-                            }
-                            else
-                            {
-                                Library.temporaryDict.Add(node.Key.Substring(1), currentValue);
-                            }
-                        }
-                    }
-                        //Überprüft ob der Knoten schon im temp-Dict ist, schreibt ggf. den kleineren Wert rein
-                    else if (Library.temporaryDict.ContainsKey(node.Key.Substring(1)))
-                    {
-                        if (currentValue < Library.temporaryDict[node.Key.Substring(1)])
-                        {
-                            //Library.discoveredWays.Add(node.Key.Substring(1), currentValue);
-                            Library.temporaryDict[node.Key.Substring(1)] = currentValue;
-                        }
-                    }
-                    else
-                    {
-                        Library.temporaryDict.Add(node.Key.Substring(1), currentValue);
-                    }
-                }
+                ActionsForNodes.ChooseCorrectMethodForNodes(node, i);
+
             }
-            foreach (KeyValuePair<string, int> i in Library.temporaryDict)
-            {
-                if (Library.discoveredWays.ContainsKey(i.Key))
-                {
-                    if (Library.discoveredWays[i.Key] > i.Value)
-                    {
-                        Library.discoveredWays[i.Key] = i.Value;
-                    }
-                }
-                else
-                {
-                    Library.discoveredWays.Add(i.Key, i.Value);
-                }
-            }
-            Library.temporaryDict.Clear();
+            ActionsForNodes.WriteCurrentValuesInDictionary();
         }
 
         public static bool IsDestinationReached(string endnode, string[] points)
