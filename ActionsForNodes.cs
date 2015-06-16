@@ -9,7 +9,7 @@ namespace Dijkstra
     class ActionsForNodes
     {
 
-        public static void ChooseCorrectMethodForNodes(KeyValuePair<string, int> node, KeyValuePair<string, int> i)
+        public static void ChooseCorrectMethodForNode(KeyValuePair<string, int> node, KeyValuePair<string, int> i)
         {
             int currentValue = Library.previousValue + node.Value;
 
@@ -29,7 +29,7 @@ namespace Dijkstra
             }
             else
             {
-                AddWayToDictionary(node, currentValue);
+                AddNewWay(node, currentValue);
             }
 
         }
@@ -51,12 +51,12 @@ namespace Dijkstra
             Library.temporaryDict[node.Key.Substring(1)] = currentValue;
         }
 
-        public static void AddWayToDictionary(KeyValuePair<string, int> node, int currentValue)
+        public static void AddNewWay(KeyValuePair<string, int> node, int currentValue)
         {
             Library.temporaryDict.Add(node.Key.Substring(1), currentValue);
         }
 
-        public static void WriteCurrentValuesInDictionary()
+        public static void WriteTempValuesInDictionary()
         {
             foreach (KeyValuePair<string, int> i in Library.temporaryDict)
             {

@@ -15,8 +15,9 @@ namespace Dijkstra
 
                 if (destinationReached)
                 {
-                    Console.WriteLine("Fertig");
-                    //return true;
+                    Console.WriteLine("Der kürzeste Weg zu {0} ist {1} Einheiten lang",endnode, Library.shortestPath);
+                    Console.ReadLine();
+                    return true;
                 }
                 for (int i = 0; i < neighbours.Length; i++)
                 {
@@ -53,6 +54,7 @@ namespace Dijkstra
             }
             string[] result = new string[neighbourCount];
 
+            //Verkleinert das Ergebnis-Arry auf die minimal Größe
             if (neighbourCount > 0)
             {
                 for (int i = 0; i < neighbourCount; i++)
@@ -76,10 +78,10 @@ namespace Dijkstra
 
             foreach (KeyValuePair<string, int> i in Library.discoveredWays)
             {
-                ActionsForNodes.ChooseCorrectMethodForNodes(node, i);
+                ActionsForNodes.ChooseCorrectMethodForNode(node, i);
 
             }
-            ActionsForNodes.WriteCurrentValuesInDictionary();
+            ActionsForNodes.WriteTempValuesInDictionary();
         }
 
         public static bool IsDestinationReached(string endnode, string[] points)

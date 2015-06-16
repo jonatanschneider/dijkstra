@@ -1,5 +1,6 @@
 ﻿
 TODO
 
-- Ausgabe
-- Problem mit V,Z,R,S,W -> da unerreichbar nach der Liste auf dem AB!
+- Problem mit Einbindung von allen Werten:
+System.TypeInitializationException
+- Ausgabe mit den zu besuchenden Knoten bis zum Endpunkt machbar?
