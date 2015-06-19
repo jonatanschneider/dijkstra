@@ -1,6 +1,5 @@
 ﻿
 TODO
 
-- Problem mit Einbindung von allen Werten:
-System.TypeInitializationException
+- StackOverflow
 - Ausgabe mit den zu besuchenden Knoten bis zum Endpunkt machbar?
