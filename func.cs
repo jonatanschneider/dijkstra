@@ -21,7 +21,9 @@ namespace Dijkstra
                 }
                 for (int i = 0; i < neighbours.Length; i++)
                 {
-                    Library.previousValue = Library.discoveredWays[neighbours[i]];
+                    string var = neighbours[i];
+                    Library.previousValue = Library.discoveredWays[var];
+                    if (! Library.discoveredWays.ContainsKey(var))
                     destinationReached = FindWay(neighbours[i], endnode);
 
                     if (destinationReached)
@@ -75,13 +77,15 @@ namespace Dijkstra
             {
                 Library.discoveredWays.Add(node.Key.Substring(1), currentValue);
             }
-
-            foreach (KeyValuePair<string, int> i in Library.discoveredWays)
+            else
             {
-                ActionsForNodes.ChooseCorrectMethodForNode(node, i);
+                foreach (KeyValuePair<string, int> i in Library.discoveredWays)
+                {
+                    ActionsForNodes.ChooseCorrectMethodForNode(node, i);
 
+                }
+                ActionsForNodes.WriteTempValuesInDictionary();
             }
-            ActionsForNodes.WriteTempValuesInDictionary();
         }
 
         public static bool IsDestinationReached(string endnode, string[] points)
