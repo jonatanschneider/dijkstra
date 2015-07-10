@@ -23,9 +23,11 @@ namespace Dijkstra
                 {
                     string var = neighbours[i];
                     Library.previousValue = Library.discoveredWays[var];
-                    if (! Library.discoveredWays.ContainsKey(var))
-                    destinationReached = FindWay(neighbours[i], endnode);
-
+                   //if Buggy?? Verhinderte den StackOverflow
+                    //if (!Library.discoveredWays.ContainsKey(var))
+                    //{
+                        destinationReached = FindWay(neighbours[i], endnode);
+                    //}
                     if (destinationReached)
                     {
                         return destinationReached;
@@ -49,9 +51,15 @@ namespace Dijkstra
             {
                 if (i.Key.StartsWith(node))
                 {
-                    MarkNodeAsVisited(i);
-                    neighbours[neighbourCount] = i.Key.Substring(1);
-                    neighbourCount++;
+                    if (Library.discoveredWays.ContainsKey(i.Key.Substring(1)))
+                    {
+                    }
+                    else
+                    {
+                        MarkNodeAsVisited(i);
+                        neighbours[neighbourCount] = i.Key.Substring(1);
+                        neighbourCount++;
+                    }
                 }
             }
             string[] result = new string[neighbourCount];
