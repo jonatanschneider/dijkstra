@@ -11,10 +11,14 @@ namespace Dijkstra
         static void Main(string[] args)
         {
             string startnode, endnode;
+
             Console.WriteLine("Geben Sie den Startpunkt ein");
-            startnode = Console.ReadLine();
+            startnode = Console.ReadLine().ToUpper();
+
             Console.WriteLine("Geben Sie den Endpunkt ein");
-            endnode = Console.ReadLine();
+            endnode = Console.ReadLine().ToUpper();
+
+            Library.previousValue = 0;
 
             func.FindWay(startnode, endnode);
 
